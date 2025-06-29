@@ -2,8 +2,8 @@
 import React from 'react';
 import './App.css';
 const App: React.FC = () => {
-  const a =10;
-  console.log('hello')
+  const a: number  =10;
+  console.log(a)
   return (
     <div className="App">
       <header className="App-header">
