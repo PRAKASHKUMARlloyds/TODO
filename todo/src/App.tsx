@@ -1,26 +1,18 @@
-// App.tsx
 import React from 'react';
-import './App.css';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
+import AddTodo from './component/AddTodo/AddTodo';
+import TodoList from './component/TodoList/TodoList';
+
+
 const App: React.FC = () => {
-  const a: number  =10;
-  console.log(a)
   return (
-    <div className="App">
-      <header className="App-header">
-       
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <div>
+        <AddTodo />
+         <TodoList />
+      </div>
+    </Provider>
   );
 };
 
