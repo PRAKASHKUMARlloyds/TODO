@@ -84,8 +84,8 @@ const TodoItem: React.FC<Props> = ({ id, text, completed, priority, dueDate }) =
             <Chip
               label={
                 isOverdue && !completed
-                  ? `🚨 Overdue (${dayjs(dueDate).format('DD MMM')})`
-                  : `📅 Due: ${dayjs(dueDate).format('DD MMM')}`
+                  ? ` Overdue (${dayjs(dueDate).format('DD MMM')})`
+                  : `Due: ${dayjs(dueDate).format('DD MMM')}`
               }
               size="small"
               color={isOverdue && !completed ? 'error' : 'default'}
