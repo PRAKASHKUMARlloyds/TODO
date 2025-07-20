@@ -17,7 +17,7 @@ import {
 
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import  { Dayjs } from 'dayjs';
+import { Dayjs } from 'dayjs';
 
 const MAX_LENGTH = 100;
 
@@ -50,7 +50,7 @@ const AddTodo: React.FC = () => {
   return (
     <Paper elevation={3} sx={{ padding: 3, maxWidth: 480, margin: '2rem auto' }}>
       <Typography variant="h5" gutterBottom>
-         Add TODO
+        Add TODO
       </Typography>
 
       <Box display="flex" flexDirection="column" gap={2}>
@@ -66,9 +66,23 @@ const AddTodo: React.FC = () => {
           error={input.length > MAX_LENGTH}
         />
 
-        <FormControl fullWidth>
+        {/* <FormControl fullWidth>
           <InputLabel>Priority</InputLabel>
           <Select
+            value={priority}
+            label="Priority"
+            onChange={(e) => setPriority(e.target.value)}
+          >
+            <MenuItem value="Low">Low</MenuItem>
+            <MenuItem value="Medium">Medium</MenuItem>
+            <MenuItem value="High">High</MenuItem>
+          </Select>
+        </FormControl> */}
+        <FormControl fullWidth>
+          <InputLabel id="priority-label">Priority</InputLabel>
+          <Select
+            labelId="priority-label"      
+            id="priority-select"
             value={priority}
             label="Priority"
             onChange={(e) => setPriority(e.target.value)}

@@ -9,7 +9,6 @@ const App: React.FC = () => {
   return (
     <Provider store={store}>
       <div>
-        
         <AddTodo />
          <TodoList />
       </div>
