@@ -31,7 +31,10 @@ const todoSlice = createSlice({
 
         toggleTodo(state, action: PayloadAction<number>) {
             const index = state.items.find(t => t.id === action.payload)
-            if (index) index.completed = !index.completed
+            if (index){ index.completed = !index.completed}
+            else{
+                console.log('Todo not found')
+            }
         },
         deleteTodo(state, action: PayloadAction<number>) {
             state.items = state.items.filter(t => t.id !== action.payload)
