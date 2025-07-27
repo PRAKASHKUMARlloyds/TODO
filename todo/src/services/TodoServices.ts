@@ -5,7 +5,7 @@ import {NewTodoPayload} from "./NewTodoTypes";
 // Add a Todo
 export const addTodo = async (payload: NewTodoPayload): Promise<Todo> => {
   try {
-    const response = await axiosClient.post<Todo>("/todos", payload);
+    const response = await axiosClient.post<Todo>("/todos/add", payload);
     return response.data;
   } catch (error) {
     console.error("Error adding todo:", error);
@@ -26,7 +26,7 @@ export const deleteTodo = async (id: number): Promise<void> => {
 // Toggle Completion Status
 export const toggleTodo = async (id: number): Promise<void> => {
   try {
-    await axiosClient.put(`/todos/${id}`);
+    await axiosClient.put(`/todos/update/${id}`);
   } catch (error) {
     console.error(`Error toggling todo with id ${id}:`, error);
     throw error;
@@ -36,7 +36,7 @@ export const toggleTodo = async (id: number): Promise<void> => {
 // Fetch All Todos
 export const getTodos = async (): Promise<Todo[]> => {
   try {
-    const response = await axiosClient.get("/todos");
+    const response = await axiosClient.get("/todos/all");
     return response.data;
   } catch (error) {
     console.error("Error fetching todos:", error);
