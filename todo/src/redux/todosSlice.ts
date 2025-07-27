@@ -1,48 +1,31 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-
-interface Todo {
-    id: number,
-    text: string,
-    completed: boolean,
-    priority: string;
-    dueDate: string | null;
-
-}
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Todo } from "../services/TodoTypes";
 
 interface TodoState {
-    items: Todo[]
+  items: Todo[];
 }
 
 const initialState: TodoState = { items: [] };
+
 const todoSlice = createSlice({
-    name: 'todos',
-    initialState,
-    reducers: {
-        addTodo(state, action: PayloadAction<{ text: string; priority: string; dueDate: string | null }>) {
-            const newTodo: Todo = {
-                id: Date.now(),
-                text: action.payload.text,
-                completed: false,
-                priority: action.payload.priority,
-                dueDate: action.payload.dueDate
-            };
-            state.items.push(newTodo);
-        },
+  name: "todos",
+  initialState,
+  reducers: {
+    addTodo(state, action: PayloadAction<Todo>) {
+      state.items.push(action.payload);
+    },
+    toggleTodo(state, action: PayloadAction<number>) {
+      const todo = state.items.find(t => t.id === action.payload);
+      if (todo) todo.completed = !todo.completed;
+    },
+    deleteTodo(state, action: PayloadAction<number>) {
+      state.items = state.items.filter(t => t.id !== action.payload);
+    },
+    fetchTodos(state, action: PayloadAction<Todo[]>) {
+      state.items = action.payload;
+    },
+  }
+});
 
-        toggleTodo(state, action: PayloadAction<number>) {
-            const index = state.items.find(t => t.id === action.payload)
-            if (index){ index.completed = !index.completed}
-            else{
-                console.log('Todo not found')
-            }
-        },
-        deleteTodo(state, action: PayloadAction<number>) {
-            state.items = state.items.filter(t => t.id !== action.payload)
-        }
-
-
-    }
-
-})
-export const { addTodo, toggleTodo, deleteTodo } = todoSlice.actions;
-export default todoSlice.reducer
+export const { addTodo, toggleTodo, deleteTodo,fetchTodos } = todoSlice.actions;
+export default todoSlice.reducer;

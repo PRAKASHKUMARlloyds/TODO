@@ -11,7 +11,13 @@ describe('todoSlice', () => {
 
   it('should add a new todo item', () => {
     const initialState = { items: [] };
-    const action = addTodo({ text: 'Test Redux', priority: 'High', dueDate: '2025-08-01' });
+    const action = addTodo({
+      id: 1,
+      text: 'Test Redux',
+      completed: false,
+      priority: 'High',
+      dueDate: '2025-08-01',
+    }); 
     const state = reducer(initialState, action);
 
     expect(state.items.length).toBe(1);

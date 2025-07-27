@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../redux/store';
-import { addTodo } from '../../redux/todosSlice';
 
 import {
   Box,
@@ -18,6 +17,8 @@ import {
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { Dayjs } from 'dayjs';
+import { addTodoRequest } from '../../redux/todoAction';
+import { NewTodoPayload } from '../../services/NewTodoTypes';
 
 const MAX_LENGTH = 100;
 
@@ -35,13 +36,13 @@ const AddTodo: React.FC = () => {
   const handleClick = () => {
     if (!input.trim() || input.length > MAX_LENGTH) return;
 
-    const newTodo = {
+    const newTodo : NewTodoPayload = {
       text: input.trim(),
       priority,
-      dueDate: dueDate?.format('YYYY-MM-DD') || null
+      dueDate: dueDate ? dueDate.format('YYYY-MM-DD') : null
     };
 
-    dispatch(addTodo(newTodo));
+    dispatch(addTodoRequest(newTodo));
     setInput('');
     setPriority('Medium');
     setDueDate(null);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../redux/store';
 import TodoItem from '../TodoItem/TodoItem';
 
@@ -20,13 +20,21 @@ import {
   MenuItem
 } from '@mui/material';
 import dayjs from 'dayjs';
+import { fetchTodosRequest } from '../../redux/todoAction';
 
 const ITEMS_PER_PAGE = 5;
 
 type PriorityFilter = 'All' | 'Low' | 'Medium' | 'High';
 type StatusFilter = 'All' | 'Active' | 'Completed';
 
+
+
+
 const TodoList: React.FC = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchTodosRequest());
+  }, []);
   const todos = useSelector((state: RootState) => state.todos.items);
   const listRef = useRef<HTMLDivElement | null>(null);
 
@@ -60,7 +68,7 @@ const TodoList: React.FC = () => {
     <Container maxWidth="md" sx={{ mt: 4 }} ref={listRef}>
       <Paper elevation={3} sx={{ p: 3 }}>
         <Typography variant="h5" gutterBottom>
-           Todo Table 
+          Todo Table
         </Typography>
 
         <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
@@ -143,8 +151,8 @@ const TodoList: React.FC = () => {
                           todo.priority === 'High'
                             ? 'error'
                             : todo.priority === 'Medium'
-                            ? 'warning'
-                            : 'success'
+                              ? 'warning'
+                              : 'success'
                         }
                         size="small"
                         variant="outlined"
@@ -161,15 +169,15 @@ const TodoList: React.FC = () => {
                           todo.completed
                             ? 'Completed'
                             : isOverdue
-                            ? 'Overdue'
-                            : 'Active'
+                              ? 'Overdue'
+                              : 'Active'
                         }
                         color={
                           todo.completed
                             ? 'success'
                             : isOverdue
-                            ? 'error'
-                            : 'warning'
+                              ? 'error'
+                              : 'warning'
                         }
                         size="small"
                         variant="filled"

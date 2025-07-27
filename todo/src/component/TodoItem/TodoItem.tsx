@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { toggleTodo, deleteTodo } from '../../redux/todosSlice';
 import { AppDispatch } from '../../redux/store';
+import { toggleTodoRequest, deleteTodoRequest} from '../../redux/todoAction';
 
 import {
   Box,
@@ -56,7 +56,7 @@ const TodoItem: React.FC<Props> = ({ id, text, completed, priority, dueDate }) =
         <Box display="flex" alignItems="center" gap={2} flexWrap="wrap">
           <Checkbox
             checked={completed}
-            onChange={() => dispatch(toggleTodo(id))}
+            onChange={() => dispatch(toggleTodoRequest(id))}
             color="primary"
           />
           <Tooltip title={text}>
@@ -96,7 +96,7 @@ const TodoItem: React.FC<Props> = ({ id, text, completed, priority, dueDate }) =
 
         <IconButton
           aria-label="delete"
-          onClick={() => dispatch(deleteTodo(id))}
+          onClick={() => dispatch(deleteTodoRequest(id))}
           color="error"
         >
           <DeleteIcon />
